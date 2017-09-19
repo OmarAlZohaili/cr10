@@ -2,9 +2,9 @@
 
 $id = $_POST['delete_id'];
 include('dbconnect.php');
-//echo $id . "<br>";
+echo $id . "<br>";
 
-$sql=('DELETE FROM cart WHERE cartId = "'.$id.'"');
+$sql=('DELETE FROM cart WHERE productid = "'.$productid.'"');
 
 if (mysqli_query($conn,$sql)){
 	echo ($id);

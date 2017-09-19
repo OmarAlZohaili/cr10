@@ -48,7 +48,7 @@
    if( $count == 1 && $row['userPass']==$password ) {
     $_SESSION['user'] = $row['userId'];
    // $_SESSION['category'] = $row['category'];
-    header("Location: home.php");
+    header("Location: products.php");
    } else {
     $errMSG = "Incorrect Credentials, Try again...";
    }

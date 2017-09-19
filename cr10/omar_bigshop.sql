@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2017 at 06:56 PM
+-- Generation Time: Sep 19, 2017 at 02:34 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -31,11 +31,46 @@ SET time_zone = "+00:00";
 CREATE TABLE `cart` (
   `cartId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
-  `productId` int(11) NOT NULL,
-  `productName` varchar(50) NOT NULL,
-  `productImg` varchar(500) NOT NULL,
-  `productPrice` int(11) NOT NULL
+  `productId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cartId`, `userId`, `productId`) VALUES
+(40, 2, 1),
+(41, 2, 2),
+(42, 2, 1),
+(43, 2, 1),
+(44, 2, 1),
+(45, 2, 1),
+(46, 2, 1),
+(47, 2, 1),
+(48, 2, 1),
+(49, 2, 1),
+(50, 2, 1),
+(51, 2, 1),
+(52, 2, 1),
+(53, 2, 1),
+(54, 2, 1),
+(55, 2, 1),
+(56, 2, 1),
+(57, 2, 1),
+(58, 2, 2),
+(59, 2, 1),
+(62, 2, 2),
+(63, 2, 3),
+(64, 2, 8),
+(65, 2, 2),
+(66, 2, 2),
+(67, 2, 2),
+(68, 2, 1),
+(69, 2, 1),
+(70, 2, 1),
+(71, 2, 3),
+(72, 2, 3),
+(73, 2, 8);
 
 -- --------------------------------------------------------
 
@@ -88,7 +123,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`userId`, `firstName`, `lastName`, `userEmail`, `userPass`, `photolink`) VALUES
 (2, 'ttt', 'ttt', 't@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'http://i0.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg'),
-(3, 'rrr', 'rrr', 'w@gmail.com', '95fbeb8f769d2c0079d1d11348877da944aaefaba6ecf9f7f7dab6344ece8605', 'aa');
+(3, 'rrr', 'rrr', 'w@gmail.com', '95fbeb8f769d2c0079d1d11348877da944aaefaba6ecf9f7f7dab6344ece8605', 'aa'),
+(4, 'uuu', 'uuu', 'u@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '66666');
 
 --
 -- Indexes for dumped tables
@@ -99,8 +135,8 @@ INSERT INTO `users` (`userId`, `firstName`, `lastName`, `userEmail`, `userPass`,
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`cartId`),
-  ADD UNIQUE KEY `userId` (`userId`),
-  ADD UNIQUE KEY `productId` (`productId`);
+  ADD KEY `userId` (`userId`) USING BTREE,
+  ADD KEY `productId` (`productId`) USING BTREE;
 
 --
 -- Indexes for table `products`
@@ -122,7 +158,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 --
 -- AUTO_INCREMENT for table `products`
 --
@@ -132,7 +168,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --

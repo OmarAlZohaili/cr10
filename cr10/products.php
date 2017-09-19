@@ -28,8 +28,8 @@
     max-width: 35vh;
   }
   .container-fluid{
-    background-color: #713A1B;
-    color: white;
+    background-color: #696969;
+    color: black;
   }
   #title{
     font-size: 25px;
@@ -39,7 +39,7 @@
     font-family: : curier;
   }
   a {
-      color: white;
+      color: purple;
     }
   @import url('https://fonts.googleapis.com/css?family=Raleway');
     h1{
@@ -49,6 +49,9 @@
     #header img{
       max-height: 100px;
       width: 100%;
+    }
+    #cartPlace{
+      position: absolute;
     }
 
 </style>
@@ -80,33 +83,58 @@
               echo "<div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-3 col-lg-offset-3\">";
               echo "<img class=\"img-responsive\" src=\"".$userRow['photolink'] ."\">";
               echo "<a href=\"logout.php?logout\">Sign Out</a>";
+              echo "<h2>"."cart"."</h2>";
+              echo "<div id=\"cartPlace\" action=\"addCart.php\" method=\"POST\">";
+                     
+                  echo "</div>";
               echo "</div>";
+
               echo "</div>";
             ?>
 
    
 
              <?php   
-            include "printrow.php";
-              $sqlstatement = "SELECT * FROM products";
-              $photos = mysqli_query($conn,$sqlstatement);
-              $linkArray = Array();
-              $counter = 0;
-                echo "<div id=\"allproducts\">";
-              $row = mysqli_fetch_array($photos, MYSQLI_NUM);
-              while ($row != NULL){
-                print_row($row); 
-                
-               
-                
-               
-                $linkArray[$counter] = $row[0];
+            $sqlstatement = "SELECT * FROM products";
+  $xy = mysqli_query($conn,$sqlstatement);
+  //$linkArray = Array();
+  $counter = 0;
+  
+  $row = mysqli_fetch_array($xy, MYSQLI_ASSOC);
+  echo "<div id=\"allproducts\">";            
+      
+    echo "<div class=\"row\" >";
+      while ($row != NULL){
+      
+        $productId = $row['productId'];
+        //$linkArray[$counter] = $row['product_id'];
+
+
+
+                  echo "<div class=\"col-lg-2 col-md-2 col-sm-2 col-xs-2\">";
+                  echo "<img class=\"img-responsive\" src=\"".$row['productImg'] ."\">";
+                  
+                  echo "<a id=\"titel\" href='profile.php?id=" . $row['productId'] . "'>" . $row['productName']. "</a>"."<br>";
+
+                  echo "<p id='price'>"."$".$row['productPrice']."</p>";
+                  echo "<a id=\"details\" href='profile.php?id=" . $row['productId'] . "'>" . "details...". "</a>"."<br>";
+                  echo "<button class=\"add\" value=\"". $productId . "\" type=\"button\">Add</button>";
+                  echo "</div>";
+ 
+
+                //$linkArray[$counter] = $row['product_id'];
                 $counter += 1;
-                $row = mysqli_fetch_array($photos, MYSQLI_NUM);
-              }
-              echo "</div>";
-              echo "</div>";
-             // var_dump($_SESSION);
+            $row = mysqli_fetch_array($xy, MYSQLI_ASSOC);
+
+            if($counter % 4 == 0) {
+            echo "</div>";
+            echo "<div class=\"row\" >";
+            }
+            
+      }
+    echo "</div>";
+  echo "</div>";
+echo "</div>";
         
 
 
@@ -115,46 +143,46 @@
 
 <script>
             $(document).ready(function(){
-            $("#submit").click(function(){
-            var productName = $("#productName").val();
-            var productPrice = $("#productPrice").val();
+            $(".add").click(function(){
+             
+    
+          
+            alert("productId =" + $(this).attr("value"));
+            var productId = $(this).attr("value");
+             var userId  = <?php echo $_SESSION['user'] ; ?> ;
+             alert("userId =" + userId);
+             
+             
+
+
             
-            var productDetail = $("#productDetail").val();
-            var productImg = $("#photoLink").val();
-           
-           
-            var dataString = 'productName1='+ productName;
-            var dataString1 = '&productPrice1='+ productPrice;
-            var dataString2 = '&productDetail1='+ productDetail;
+           var dataString = '&userId='+ userId;
+           var dataString1 = '&productId='+ productId;
             
-            var dataString3 = '&photoLink1='+ productImg;
-           \
-           
-            
-            
-            dataString4=dataString;
-            dataString4+=dataString1;
-            dataString4+=dataString2;
-            dataString4+=dataString3;
+                   
             
 
            
 
-            if(productName==''){
-            alert("Please Fill All Fields");
+            if(productId==''){
+              alert("Please Fill All Fields");
+              
+            
             }else{
             // AJAX Code To Submit Form.
-              $.ajax({
+            $.ajax({
                 type: "POST",
-                url: "exerciseajax.php",
-                data: dataString7,
+                url: "addCart.php",
+                data: dataString + dataString1,
                 cache: false,
                 success: function(result){
                   alert(result);
                  // window.location.reload();
-                 $('#allproducts').prepend(result);
+                 $('#cartPlace').prepend(result);
                 }
             });
+            
+              
             }
  return false;
        });
@@ -162,7 +190,7 @@
 
     $(document).ready(function()
     {
-        $(".delete_video").click(function()
+        $("#delete").click(function()
         { console.log("Hallo");
             var del_id = $(this).val();
 

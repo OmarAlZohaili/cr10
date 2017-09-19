@@ -2,7 +2,7 @@
  ob_start();
  session_start(); // start a new session or continues the previous
  if( isset($_SESSION['user'])!="" || isset($_SESSION['login'])){
-  header("Location: home.php"); // redirects to home.php
+  header("Location: index.php"); // redirects to indexs.php
  }
  include_once 'dbconnect.php';
  $error = false;

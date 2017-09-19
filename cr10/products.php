@@ -117,7 +117,7 @@
                   echo "<a id=\"titel\" href='profile.php?id=" . $row['productId'] . "'>" . $row['productName']. "</a>"."<br>";
 
                   echo "<p id='price'>"."$".$row['productPrice']."</p>";
-                  echo "<a id=\"details\" href='profile.php?id=" . $row['productId'] . "'>" . "details...". "</a>"."<br>";
+                  echo "<p id='price'>".$row['productDetail']."</p>";
                   echo "<button class=\"add\" value=\"". $productId . "\" type=\"button\">Add</button>";
                   echo "</div>";
  

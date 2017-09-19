@@ -93,50 +93,9 @@
 
 
 
-         <script>
-  function initMap(){
-    //Map options
-    var options = {
-      zoom:10,
-      center:{lat:48.299052, lng:16.564012}
-    }
-
-    //New map
-    var map = new google.maps.Map(document.getElementById('map'), options);
-
-    var icon = {
-    url: "https://vignette.wikia.nocookie.net/tinyzoo/images/d/d2/Fruit_Basket.png/revision/latest?cb=20130130013048", // url
-    scaledSize: new google.maps.Size(50, 50), // scaled size
-    origin: new google.maps.Point(0,0), // origin
-    anchor: new google.maps.Point(0, 0) // anchor
-};
-
-var marker = new google.maps.Marker({
-    position: new google.maps.LatLng(48.394066, 16.663693 ),
-    map: map,
-    icon: icon
-});
+         
 
 
- 
-    var infoWindow = new google.maps.InfoWindow({
-      content:'<p>We are open:</p><br></p>Mo-Fr: 08:00-17:00</p><br><p>Sa: 09:00-16:00</p><br><p>Sunday: closed</p>'
-    });
-    
-
-    marker.addListener('click', function(){
-       infoWindow.open(map, marker);
-});
-
-
-
-    
-
-  }
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLsA8u10nhLIvj2GU1Gn3D8p4LHnQX9c4&callback=initMap">
-    </script> 
           
 </body>
 </html>
